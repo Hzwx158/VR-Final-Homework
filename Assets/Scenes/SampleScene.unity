@@ -6597,7 +6597,7 @@ GameObject:
   - component: {fileID: 1219060321}
   - component: {fileID: 1219060322}
   m_Layer: 0
-  m_Name: NoteButtons
+  m_Name: EventController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6656,7 +6656,6 @@ MonoBehaviour:
   - {fileID: 53211106}
   WinAudioSource: {fileID: 196944783}
   TomoSource: {fileID: 402903816}
-  SoyoSource: {fileID: 1378565944}
   PaiSource: {fileID: 81490090}
   FurinaAnimator: {fileID: 196944784}
   TomorinAnimator: {fileID: 402903820}
@@ -7753,7 +7752,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.8, z: 0.4}
+  m_Size: {x: 0.3, y: 0.9, z: 0.3}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1378565943 stripped
 Transform:
@@ -7869,12 +7868,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpinSpeed: 30
-  MoveSpeed: 3
+  MoveSpeed: 1
   SoyoCtrl:
   - {fileID: 839532372}
   - {fileID: 1881104869}
   - {fileID: 1887213456}
   - {fileID: 511324160}
+  Door: {fileID: 1736736706}
 --- !u!54 &1378565946
 Rigidbody:
   m_ObjectHideFlags: 0

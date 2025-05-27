@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class NoteButtonsController : MonoBehaviour
+public class EventController : MonoBehaviour
 {
     enum Note
     {
@@ -26,16 +26,13 @@ public class NoteButtonsController : MonoBehaviour
     // audio source
     public List<AudioSource> NoteAudioSources;
     public AudioSource WinAudioSource;
-    public AudioSource TomoSource; 
-    public AudioSource SoyoSource;
+    public AudioSource TomoSource;
     public AudioSource PaiSource;
     public Animator FurinaAnimator; 
     public Animator TomorinAnimator; 
-    //public Animator SoyorinAnimator; 
     public Animator PaimonAnimator; 
     private float frnMovingTime = 0;
     private float tmrMovingTime = 0;
-    //private float soyMovingTime = 0;
     private float paiMovingTime = 0;
     public GameObject Prompt1;
     public GameObject Prompt2;
@@ -48,7 +45,7 @@ public class NoteButtonsController : MonoBehaviour
         }
         clickNotes.Enqueue(note);
     }
-    private void playNote(Note note)
+    private void PlayNote(Note note)
     {
         NoteAudioSources[(int)(note)].Play();
     }
@@ -84,15 +81,6 @@ public class NoteButtonsController : MonoBehaviour
         {
             TomorinAnimator.SetBool("ClickToMove", false);
         }
-        // soyorin moving
-
-        //if(soyMovingTime > Time.deltaTime*2){
-        //    soyMovingTime = 0;
-        //    SoyorinAnimator.SetBool("ClickToMove", false); 
-        //}
-        //else if(soyMovingTime > 0){
-        //    soyMovingTime += Time.deltaTime;
-        //}
         // paimon moving
 
         if(paiMovingTime > Time.deltaTime*2){
@@ -125,37 +113,37 @@ public class NoteButtonsController : MonoBehaviour
     public void SelectOthers()
     {
         updateNote(Note.OTHERS);
-        playNote(Note.OTHERS);
+        PlayNote(Note.OTHERS);
     }
     public void SelectD5()
     {
         updateNote(Note.D5);
-        playNote(Note.D5);
+        PlayNote(Note.D5);
     }
     public void SelectC5()
     {
         updateNote(Note.C5);
-        playNote(Note.C5);
+        PlayNote(Note.C5);
     }
     public void SelectA4()
     {
         updateNote(Note.A4);
-        playNote(Note.A4);
+        PlayNote(Note.A4);
     }
     public void SelectG4()
     {
         updateNote(Note.G4);
-        playNote(Note.G4);
+        PlayNote(Note.G4);
     }
     public void SelectF4()
     {
         updateNote(Note.F4);
-        playNote(Note.F4);
+        PlayNote(Note.F4);
     }
     public void SelectD4()
     {
         updateNote(Note.D4);
-        playNote(Note.D4);
+        PlayNote(Note.D4);
     }
     public void SelectSound()
     {
@@ -169,21 +157,10 @@ public class NoteButtonsController : MonoBehaviour
         TomoSource.Play();
         Prompt2.SetActive(true);
     }
-    //public void SelectSoyorin()
-    //{
-    //    SoyoSource.Play();
-    //    soyMovingTime = Time.deltaTime;
-    //    SoyorinAnimator.SetBool("ClickToMove", true);
-    //    // Prompt3.SetActive(true);
-    //}
     public void SelectPaimon()
     {
         PaiSource.Play();
         paiMovingTime = Time.deltaTime;
         PaimonAnimator.SetBool("ClickToMove", true);
-    }
-    public void GrabLeft()
-    {
-
     }
 }

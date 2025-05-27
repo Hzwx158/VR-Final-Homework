@@ -15,6 +15,8 @@ public class SoyoController : MonoBehaviour
     public GameObject[] SoyoCtrl;
     private Vector3 lastPos;
     private bool recordPos = false;
+    public DoorController Door;
+    private AudioSource audioSource; // 需要一个比较短的音频
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class SoyoController : MonoBehaviour
         SoyoCtrl[0].GetComponent<XRGrabInteractable>().selectEntered.AddListener(MoveStraight);
         SoyoCtrl[1].GetComponent<XRGrabInteractable>().selectEntered.AddListener(MoveLeft);
         SoyoCtrl[2].GetComponent<XRGrabInteractable>().selectEntered.AddListener(MoveRight);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,10 +63,19 @@ public class SoyoController : MonoBehaviour
             float deltaX = lastPos.x - wallPos.x;
             float deltaZ = lastPos.z - wallPos.z;
             transform.position = new Vector3(
-                wallPos[0] + Math.Sign(deltaX)*0.5f, 
+                //wallPos[0] ,
+                lastPos.x + Math.Sign(deltaX) * 0.5f,
                 transform.position.y, 
-                wallPos[2] + Math.Sign(deltaZ) * 0.5f
+                //wallPos[2] 
+                lastPos.z + Math.Sign(deltaZ) * 0.5f
             );
+        }
+        else if (other.gameObject.name == "DoorStage2")
+        {
+            // 胜利
+            Debug.Log("Victory");
+            MoveStop();
+            Door.Open();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -85,15 +97,24 @@ public class SoyoController : MonoBehaviour
         Debug.Log("call MoveStraight");
         animator.speed = MoveSpeed;
         animator.SetBool("ClickToMove", true);
+        //audioSource.Play(); //TODO
     }
 
     public void MoveLeft(SelectEnterEventArgs args)
     {
+        var interactor = args.interactorObject as XRBaseInteractor;
+        Debug.Log(interactor.gameObject.name);
+        if (!interactor.gameObject.CompareTag("left"))
+            return;
         Debug.Log("call MoveLeft");
         spinSpeed = -SpinSpeed;
     }
     public void MoveRight(SelectEnterEventArgs args)
     {
+        var interactor = args.interactorObject as XRBaseInteractor;
+        Debug.Log(interactor.gameObject.name);
+        if (!interactor.gameObject.CompareTag("left"))
+            return;
         Debug.Log("call MoveRight");
         spinSpeed = SpinSpeed;
     }
