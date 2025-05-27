@@ -31,11 +31,11 @@ public class NoteButtonsController : MonoBehaviour
     public AudioSource PaiSource;
     public Animator FurinaAnimator; 
     public Animator TomorinAnimator; 
-    public Animator SoyorinAnimator; 
+    //public Animator SoyorinAnimator; 
     public Animator PaimonAnimator; 
     private float frnMovingTime = 0;
     private float tmrMovingTime = 0;
-    private float soyMovingTime = 0;
+    //private float soyMovingTime = 0;
     private float paiMovingTime = 0;
     public GameObject Prompt1;
     public GameObject Prompt2;
@@ -86,13 +86,13 @@ public class NoteButtonsController : MonoBehaviour
         }
         // soyorin moving
 
-        if(soyMovingTime > Time.deltaTime*2){
-            soyMovingTime = 0;
-            SoyorinAnimator.SetBool("ClickToMove", false); 
-        }
-        else if(soyMovingTime > 0){
-            soyMovingTime += Time.deltaTime;
-        }
+        //if(soyMovingTime > Time.deltaTime*2){
+        //    soyMovingTime = 0;
+        //    SoyorinAnimator.SetBool("ClickToMove", false); 
+        //}
+        //else if(soyMovingTime > 0){
+        //    soyMovingTime += Time.deltaTime;
+        //}
         // paimon moving
 
         if(paiMovingTime > Time.deltaTime*2){
@@ -169,17 +169,21 @@ public class NoteButtonsController : MonoBehaviour
         TomoSource.Play();
         Prompt2.SetActive(true);
     }
-    public void SelectSoyorin()
-    {
-        SoyoSource.Play();
-        soyMovingTime = Time.deltaTime;
-        SoyorinAnimator.SetBool("ClickToMove", true);
-        // Prompt3.SetActive(true);
-    }
+    //public void SelectSoyorin()
+    //{
+    //    SoyoSource.Play();
+    //    soyMovingTime = Time.deltaTime;
+    //    SoyorinAnimator.SetBool("ClickToMove", true);
+    //    // Prompt3.SetActive(true);
+    //}
     public void SelectPaimon()
     {
         PaiSource.Play();
         paiMovingTime = Time.deltaTime;
         PaimonAnimator.SetBool("ClickToMove", true);
+    }
+    public void GrabLeft()
+    {
+
     }
 }
