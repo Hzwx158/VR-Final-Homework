@@ -37,6 +37,7 @@ public class EventController : MonoBehaviour
     public GameObject Prompt1;
     public GameObject Prompt2;
     // public GameObject Prompt3;
+    public GameObject Prompt4, Prompt5, Prompt6, Prompt7;
     private void updateNote(Note note)
     {
         while(clickNotes.Count >= 11)
@@ -55,6 +56,11 @@ public class EventController : MonoBehaviour
         clickNotes = new Queue<Note>();
         Prompt1.SetActive(false);
         Prompt2.SetActive(false);
+        // Prompt3.SetActive(false);
+        Prompt4.SetActive(false);
+        Prompt5.SetActive(false);
+        Prompt6.SetActive(false);
+        Prompt7.SetActive(false);
         // Prompt3.SetActive(false);
     }
 
@@ -163,4 +169,13 @@ public class EventController : MonoBehaviour
         paiMovingTime = Time.deltaTime;
         PaimonAnimator.SetBool("ClickToMove", true);
     }
+    // public void SelectSoyo() => Prompt3.SetActive(true);
+    public void HoverSummon() => Prompt4.SetActive(true);
+    public void UnhoverSummon() => Prompt4.SetActive(false);
+    public void HoverStraight() => Prompt5.SetActive(true);
+    public void UnhoverStraight() => Prompt5.SetActive(false);
+    public void HoverLeft() => Prompt6.SetActive(true);
+    public void UnhoverLeft() => Prompt6.SetActive(false);
+    public void HoverRight() => Prompt7.SetActive(true);
+    public void UnhoverRight() => Prompt7.SetActive(false);
 }
