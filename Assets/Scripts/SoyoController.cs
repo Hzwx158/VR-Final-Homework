@@ -17,10 +17,12 @@ public class SoyoController : MonoBehaviour
     private bool recordPos = false;
     public DoorController Door;
     private AudioSource audioSource; // 需要一个比较短的音频
+    private bool has_victory;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        has_victory = false;
         canMove = true;
         spinSpeed = 0;
         SoyoCtrl[0].GetComponent<XRGrabInteractable>().selectEntered.AddListener(MoveStraight);
@@ -65,17 +67,19 @@ public class SoyoController : MonoBehaviour
             transform.position = new Vector3(
                 //wallPos[0] ,
                 lastPos.x + Math.Sign(deltaX) * 0.5f,
-                transform.position.y, 
+                transform.position.y,
                 //wallPos[2] 
                 lastPos.z + Math.Sign(deltaZ) * 0.5f
             );
         }
-        else if (other.gameObject.name == "DoorStage2")
+        else if (other.gameObject.name == "DoorStage2" && (!has_victory))
         {
             // 胜利
             Debug.Log("Victory");
             MoveStop();
             Door.Open();
+            audioSource.Play();
+            has_victory = true;
         }
     }
     private void OnTriggerExit(Collider other)
