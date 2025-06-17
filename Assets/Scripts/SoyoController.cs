@@ -1,27 +1,38 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
+using System.Threading;
+using System.Timers;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class SoyoController : MonoBehaviour
 {
-    private Animator animator;
+    [Header("可移动墙")]
+    public List<WallMover> Walls;
+    [Header("移动参数")]
     public float SpinSpeed;
     public float MoveSpeed;
+    [Header("环")]
+    public GameObject[] SoyoCtrl;
+    [Header("门")]
+    public DoorController Door;
+
+    private Animator animator;
     private bool canMove;
     private float spinSpeed;
-    public GameObject[] SoyoCtrl;
     private Vector3 lastPos;
     private bool recordPos = false;
-    public DoorController Door;
     private AudioSource audioSource; // 需要一个比较短的音频
     private bool has_victory;
+    private float movedCount; 
     // Start is called before the first frame update
     void Start()
     {
+        movedCount = 0;
         animator = GetComponent<Animator>();
+        animator.speed = 0;
         has_victory = false;
         canMove = true;
         spinSpeed = 0;
@@ -34,6 +45,25 @@ public class SoyoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(animator.speed !=0 || spinSpeed != 0)
+        {
+            //Debug.Log($"speed: {animator.speed}, spin: {spinSpeed}");
+            movedCount += Time.deltaTime;
+        }
+        if(movedCount >= 2)
+        {
+            var rng = new System.Random();
+            int idx = rng.Next(Walls.Count);
+            if (Walls[idx].moveDistance!=0)
+            {
+                Walls[idx].ToggleMove();
+            }
+            else 
+            { 
+                Walls[idx].ToggleRotation();
+            }
+            movedCount = 0;
+        }
         if(spinSpeed!=0)
         {
             transform.Rotate(0, spinSpeed*Time.deltaTime, 0);
@@ -45,11 +75,14 @@ public class SoyoController : MonoBehaviour
                 go.transform.position = new Vector3(pos[0], 0.1f, pos[2]);
             }
         }
-        if(recordPos)
+        if (canMove)
         {
-            lastPos = transform.position;
+            if (recordPos)
+            {
+                lastPos = transform.position;
+            }
+            recordPos = !recordPos;
         }
-        recordPos = !recordPos;
     }
 
 
@@ -61,16 +94,10 @@ public class SoyoController : MonoBehaviour
         {
             canMove = false;
             MoveStop();
-            var wallPos = other.gameObject.transform.position;
-            float deltaX = lastPos.x - wallPos.x;
-            float deltaZ = lastPos.z - wallPos.z;
-            transform.position = new Vector3(
-                //wallPos[0] ,
-                lastPos.x + Math.Sign(deltaX) * 0.5f,
-                transform.position.y,
-                //wallPos[2] 
-                lastPos.z + Math.Sign(deltaZ) * 0.5f
-            );
+            var wallPos = other.ClosestPoint(transform.position);
+            var direction = transform.position - wallPos;
+
+            transform.position = wallPos + 3 * direction;
         }
         else if (other.gameObject.name == "DoorStage2" && (!has_victory))
         {
@@ -80,6 +107,15 @@ public class SoyoController : MonoBehaviour
             Door.Open();
             audioSource.Play();
             has_victory = true;
+#if UNITY_EDITOR
+            EditorUtility.DisplayDialog("Game Over", "Finished", "Exit");
+            System.Threading.Thread.Sleep(1000);
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            System.Threading.Thread.Sleep(1000);
+            Application.Quit();
+#endif
+            canMove = false;
         }
     }
     private void OnTriggerExit(Collider other)

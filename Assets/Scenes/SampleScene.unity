@@ -7595,6 +7595,7 @@ GameObject:
   - component: {fileID: 1161594475}
   - component: {fileID: 1161594474}
   - component: {fileID: 1161594473}
+  - component: {fileID: 1161594476}
   m_Layer: 0
   m_Name: MazeWall (12)
   m_TagString: Untagged
@@ -7688,6 +7689,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161594471}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1161594476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161594471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdc8a170b256fd47af41ce061d00808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAngle: 0
+  rotationSpeed: 90
+  moveDirection: {x: 0, y: 0, z: -1}
+  moveDistance: 2
+  moveSpeed: 2
 --- !u!1 &1170840517
 GameObject:
   m_ObjectHideFlags: 0
@@ -8159,6 +8178,7 @@ GameObject:
   - component: {fileID: 1288337769}
   - component: {fileID: 1288337768}
   - component: {fileID: 1288337767}
+  - component: {fileID: 1288337770}
   m_Layer: 0
   m_Name: MazeWall (14)
   m_TagString: Untagged
@@ -8252,6 +8272,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288337765}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1288337770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288337765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdc8a170b256fd47af41ce061d00808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAngle: -90
+  rotationSpeed: -60
+  moveDirection: {x: 0, y: 0, z: -1}
+  moveDistance: 0
+  moveSpeed: 1.5
 --- !u!1001 &1295252158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9560,6 +9598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c534b79f2c58084faa5e2a8a756f5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Walls:
+  - {fileID: 1983569675}
+  - {fileID: 1288337770}
+  - {fileID: 1161594476}
+  - {fileID: 1678145641}
   SpinSpeed: 30
   MoveSpeed: 1
   SoyoCtrl:
@@ -9890,6 +9933,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 955a8a87578eacf4aa2273eaa171fba3, type: 2}
+    - target: {fileID: 5866666021909216657, guid: d8b9704a8a647cf47a4e46e98144d8cf, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10607,6 +10654,7 @@ GameObject:
   - component: {fileID: 1678145640}
   - component: {fileID: 1678145639}
   - component: {fileID: 1678145638}
+  - component: {fileID: 1678145641}
   m_Layer: 0
   m_Name: MazeWall (16)
   m_TagString: Untagged
@@ -10700,6 +10748,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678145636}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1678145641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678145636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdc8a170b256fd47af41ce061d00808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAngle: 0
+  rotationSpeed: 90
+  moveDirection: {x: -1, y: 0, z: 0}
+  moveDistance: 2
+  moveSpeed: 2
 --- !u!1 &1688376974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1571615467083929506, guid: 521327bdbcb341f782d36f02cab76cb0, type: 3}
@@ -12209,6 +12275,7 @@ GameObject:
   - component: {fileID: 1983569674}
   - component: {fileID: 1983569673}
   - component: {fileID: 1983569672}
+  - component: {fileID: 1983569675}
   m_Layer: 0
   m_Name: MazeWall (24)
   m_TagString: Untagged
@@ -12302,6 +12369,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983569670}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1983569675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983569670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdc8a170b256fd47af41ce061d00808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAngle: 0
+  rotationSpeed: 45
+  moveDirection: {x: 0, y: 0, z: -1}
+  moveDistance: 2
+  moveSpeed: 1
 --- !u!1 &2021057268
 GameObject:
   m_ObjectHideFlags: 0
